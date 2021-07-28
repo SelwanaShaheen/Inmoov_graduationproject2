@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg = "move_base" type = "move_base" respawn = "false" name = "move_base" output = "screen">
+    <param name = "base_local_planner" value = "dwa_local_planner/DWAPlannerROS" />
+    <rosparam file = "$(find at1_navigation2)/params/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file = "$(find at1_navigation2)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file = "$(find at1_navigation2)/params/local_costmap_params.yaml" command = "load" />
+    <rosparam file = "$(find at1_navigation2)/params/global_costmap_params.yaml" command = "load" />
+    <rosparam file = "$(find at1_navigation2)/params/move_base_params.yaml" command = "load" />
+    <rosparam file = "$(find at1_navigation2)/params/dwa_local_planner_params.yaml" command = "load" />
+    <remap from="cmd_vel" to="twist"/>
+    <remap from="odom" to="odometry/filtered"/>
+  </node>
+</launch>

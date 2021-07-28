@@ -1,0 +1,54 @@
+#we are using a costmap
+#map_type: costmap
+
+
+
+
+transform_tolerance: 0.1 #0.2 #5
+#maximum distance taking the obstacle data and putting it to the costmap
+obstacle_range: 4.0  #mmkn t2el
+
+#maximum distance taking the free space around therobot and putting it to the costmap.
+raytrace_range: 10.0 #5.5
+
+#slightly greater than the robot’s height
+max_obstacle_height: 1.0 #0.6
+#near the ground height
+min_obstacle_height: 0.05
+
+#where x = ROBOT_LENGTH / 2 and y = ROBOT_WIDTH / 2
+footprint: [[0.41,0.30], [0.41,-0.30], [-0.41,-0.30], [-0.41,0.30]]
+#footprint_padding: 0.01
+
+#maximum radius of your robot
+
+
+#maximum latency accepted so the system
+
+#resolution: 0.1
+
+#scaling factor that applies over the inflation
+
+
+#observation_sources: laser_scan_sensor point_cloud_sensor
+#source of the sensor data
+
+
+static:
+    map_topic: /map
+
+obstacles:
+    observation_sources: laser_scan 
+
+    laser_scan: {sensor_frame: camera_link, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+inflation:
+        inflation_radius: 0.5 #0.6
+     
+
+
+#############################################################
+#-cost_scaling_factor: 2.58  # exponential rate at which the obstacle cost drops off (default: 10)
+#origin_z: 0.0
+#z_resolution: 0.2
+#z_voxels: 2
+#publish_voxel_map: false

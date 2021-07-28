@@ -1,0 +1,11 @@
+<launch>
+<!-- Convert the depth image to a laser scan -->
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+  <param name="scan_height" value="4"/>
+  <param name="output_frame_id" value="camera_link"/>
+  <remap from="image" to="/kinect2/qhd/image_depth_rect"/>
+ 
+</node>
+  
+  <node pkg="tf" type="static_transform_publisher" name="base_camera_link" args="0 0 0 0 0 0 /base_link /camera_link 100"/> 
+</launch>

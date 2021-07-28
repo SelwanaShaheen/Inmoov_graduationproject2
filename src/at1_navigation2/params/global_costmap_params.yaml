@@ -1,0 +1,38 @@
+global_costmap:
+
+#indicates the frame for the costmap to operate in
+  global_frame: map
+
+##indicates the transformation frame of the robot’s base link
+  robot_base_frame: /base_link
+ 
+ 
+ 
+  transform_tolerance: 0.3 #0.5
+#  width: 40
+#  height: 40
+#  origin_x: 0.0
+#  origin_y: 0.0
+
+
+#resolution of the map in meters per cell. This parameter is usually higher in smaller maps(local)
+#  resolution: 0.1 #0.05
+
+#indicates whether the system uses or not a static map
+  static_map: true
+  
+
+  rolling_window: false #kant false
+
+
+
+#The frequency(in Hz) for map update and for publication of the display data
+  update_frequency: 5.0 #1.0
+  publish_frequency: 3.0 #3.0
+  plugins:
+     - {name: static,    type: "costmap_2d::StaticLayer"}
+     - {name: obstacles, type: "costmap_2d::ObstacleLayer"} 
+     - {name: inflation, type: "costmap_2d::InflationLayer"}
+
+
+

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch> 
+<node pkg="tf" type="static_transform_publisher" name="base_imu_link" args=" 0 0 0 0 0 0 base_link imu_base 100" />
+<node pkg="tf" type="static_transform_publisher" name="base_camera_link" args=" 0 0 0 0 0 0 base_link camera_link 100" />
+<node pkg="tf" type="static_transform_publisher" name="camera_kinect_link" args=" 0 0 0 -1.5707963267948966 0 -1.5707963267948966 camera_link kinect2_link 100" />
+
+
+
+
+ 
+
+
+
+
+
+</launch>

@@ -1,0 +1,21 @@
+<launch>
+
+
+  <!--<node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="false">
+  <param name="port" value="/dev/ttyACM2"/>
+  </node>-->
+<!--Launch rosserial node  for imu data-->
+  <node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="false">
+    <param name="port" value="/dev/ttyACM1"/>
+		<!--<param name="publish_tf" value="true"/>
+		<param name="linear_acceleration_stddev" value="2.5e-05"/>
+		<param name="angular_velocity_stddev" value="2.5e-05"/>
+		<param name="orientation_stddev" value="0.0"/>-->
+  </node>
+
+ 
+
+</launch>
+
+
+

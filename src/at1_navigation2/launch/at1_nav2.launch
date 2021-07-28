@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+
+
+
+  <!-- Localization -->
+  <include file="$(find at1_navigation2)/launch/amcl.launch"/>
+
+
+
+  <!-- Move base -->
+ <include file="$(find at1_navigation2)/launch/move_base.launch"/>
+
+
+
+</launch>

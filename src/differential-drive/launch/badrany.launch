@@ -1,0 +1,6 @@
+<launch>  
+<node pkg="rosserial_arduino" type="serial_node_2.py" name="serial_mega">
+    <param name="port" value="/dev/ttyACM2" />
+    <param name="baud" value="9600" /> 
+  </node>
+</launch>

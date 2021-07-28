@@ -1,0 +1,60 @@
+<launch>
+  <!-- change this next line to include the launch file for your robot's hardware drivers: -->
+  <!--include file="$(find knex_ros)/launch/knex_arduino_ser.launch" /-->
+
+  <rosparam param="ticks_meter">1005</rosparam>
+
+             <!-- rossreial using python client -->
+  <node pkg="rosserial_arduino" type="serial_node.py" name="serial_mega">
+    <param name="port" value="/dev/ttyACM0" />
+    <param name="baud" value="57600" /> 
+  </node>
+
+            <!-- rossreial using C++ server -->
+
+  
+
+  <node pkg="differential_drive" type="diff_tf.py" name="diff_tf" output="screen">
+ 
+  </node>
+
+  <node pkg="differential_drive" type="twist_to_motors.py" name="twist_to_motors" output="screen">
+    
+
+    <rosparam param="base_width">0.6</rosparam>
+  </node>
+
+  <node pkg="differential_drive" type="pid_velocity.py" name="lpid_velocity">
+      <remap from="wheel" to="lwheel"/>
+      <remap from="motor_cmd" to="lmotor_cmd"/>
+      <remap from="wheel_vtarget" to="lwheel_vtarget"/>
+      <remap from="wheel_vel" to="lwheel_vel"/>
+      <rosparam param="Kp">250</rosparam>
+      <rosparam param="Ki">850</rosparam>
+      <rosparam param="Kd">1</rosparam>
+      <rosparam param="out_min">-255</rosparam>
+      <rosparam param="out_max">255</rosparam>
+      <rosparam param="rate">30</rosparam>
+      <rosparam param="timeout_ticks">4</rosparam>
+      <rosparam param="rolling_pts">4</rosparam>
+      <rosparam param="ticks_meter">1005</rosparam>
+  </node>
+
+  <node pkg="differential_drive" type="pid_velocity.py" name="rpid_velocity">
+      <remap from="wheel" to="rwheel"/>
+      <remap from="motor_cmd" to="rmotor_cmd"/>
+      <remap from="wheel_vtarget" to="rwheel_vtarget"/>
+      <remap from="wheel_vel" to="rwheel_vel"/>
+      <rosparam param="Kp">200</rosparam>
+      <rosparam param="Ki">950</rosparam>
+      <rosparam param="Kd">1</rosparam>
+      <rosparam param="out_min">-255</rosparam>
+      <rosparam param="out_max">255</rosparam>
+      <rosparam param="rate">30</rosparam>
+      <rosparam param="timeout_ticks">4</rosparam>
+      <rosparam param="rolling_pts">4</rosparam>
+      <rosparam param="ticks_meter">1005</rosparam>
+  </node>
+
+
+</launch>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+ <include file="$(find differential_drive)/launch/odom.launch"/>
+ <include file="$(find mpu6050_serial_to_imu)/launch/demo.launch"/>
+ <node pkg="rosservice" type="rosservice" name="rosservice" args="call --wait /imu/set_zero_orientation" />
+ <include file="$(find summit_odometry)/launch/start_filter.launch"/>
+
+ 
+
+</launch>
