@@ -1,0 +1,15 @@
+<launch>
+
+  <!-- loads moveit_controller_manager on the parameter server which is taken as argument 
+    if no argument is passed, moveit_simple_controller_manager will be set -->
+  <rosparam file="$(find yarab_5_config)/config/ros_controllers.yaml"  />
+  <param name="use_controller_manager" value="true"/>
+  <param name="trajectory_execution/execution_duration_monitoring" value="true"/>
+  <arg name="moveit_controller_manager" default="moveit_simple_controller_manager/MoveItSimpleControllerManager" />
+  <!--<param name="moveit_controller_manager" value="moveit_ros_control_interface::MoveItMultiControllerManager" />-->
+  <param name="moveit_controller_manager" value="moveit_ros_control_interface::MoveItControllerManager"/>
+
+  <!-- loads ros_controllers to the param server -->
+  
+  <!--<rosparam file="$(find yarab_5)/config/joint_names_yarab_5.yaml"/>-->
+</launch>

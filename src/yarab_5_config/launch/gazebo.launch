@@ -1,0 +1,48 @@
+ 
+<launch>
+  <arg name="paused" default="true"/>
+  <arg name="gazebo_gui" default="true"/>
+  <param name="/use_sim_time" value="true"/>
+  <param name="publish_tf" value="true"/>
+  <arg name="urdf_path" default="$(find yarab_5/urdf/yarab_5.urdf"/>
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+   <!-- <arg name="world_name" default="$(find yarab_5)/world/kinecttt.world"/>-->
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gazebo_gui)"/>
+  </include>
+
+  
+   
+  <!-- send robot urdf to param server -->
+  <param name="robot_description"     command="$(find xacro)/xacro --inorder '$(find yarab_5)/urdf/yarab_5.urdf'" />
+  <remap from="/move_base_simple/goal" to="/diff_drive/cmd_vel"/>
+
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" args=" -urdf -param robot_description -model yarab_5 -x 0 -y 0 -z 0" />
+  <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
+   <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+     <param name="use_gui" value="false"/>
+     <rosparam param="source_list">[/joint_states]</rosparam>
+   </node> -->
+
+   <!-- Combine joint values -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher"
+    type="robot_state_publisher" output="screen" >
+ 
+     <param name="publish_frequency" type="double" value="100.0" />
+      
+   </node>
+
+   
+
+  
+    
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+ 
+
+</launch>

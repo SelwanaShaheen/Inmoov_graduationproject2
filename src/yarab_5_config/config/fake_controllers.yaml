@@ -1,0 +1,32 @@
+controller_list:
+  - name: fake_arm_l_controller
+    joints:
+      - omo_Lj
+      - shouder_Lj
+      - rotate_Lj
+      - hand_Lj
+      - rest_Lj
+      - end_zeft_Lj
+  - name: fake_arm_r_controller
+    joints:
+      - omo_Rj
+      - shoulder_Rj
+      - rotate_Rj
+      - hand_Rj
+      - rest_Rj
+      - end_zeft_Rj
+   
+  - name: fake_both_arms_controller
+    joints:
+      - omo_Lj
+      - shouder_Lj
+      - rotate_Lj
+      - hand_Lj
+      - rest_Lj
+      - end_zeft_Lj
+      - omo_Rj
+      - shoulder_Rj
+      - rotate_Rj
+      - hand_Rj
+      - rest_Rj
+      - end_zeft_Rj

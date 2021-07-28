@@ -1,0 +1,12 @@
+<launch>
+  <rosparam command="load" file="$(find yarab_5_config)/config/sensors_3d.yaml" />
+  <param name="octomap_frame" type="string" value="root" />
+  <param name="octomap_resolution" type="double" value="0.025" />
+  <param name="max_range" type="double" value="5.0" />
+
+   
+  <arg name="moveit_sensor_manager" default="yarab_5" />
+  <include file="$(find yarab_5_config)/launch/yarab_5_moveit_sensor_manager.launch.xml" />
+  
+</launch>
+

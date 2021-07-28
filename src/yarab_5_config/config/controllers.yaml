@@ -1,0 +1,31 @@
+controller_list:
+  - name: l_arm_position_controller  
+    action_ns: scaled_pos_traj_controller/follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    allowed_execution_duration_scaling: 1.2
+    allowed_goal_duration_margin: 0.5
+    joints:
+      - omo_Lj
+      - shouder_Lj
+      - rotate_Lj
+      - hand_Lj
+      - rest_Lj
+    constraints:
+       goal_time: 0.6
+       stopped_velocity_tolerance: 0
+  - name: r_arm_position_controler 
+    action_ns: scaled_pos_traj_controller/follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    allowed_execution_duration_scaling: 1.2
+    allowed_goal_duration_margin: 0.5
+    joints:
+      - omo_Rj
+      - shoulder_Rj
+      - rotate_Rj
+      - hand_Rj  
+      - rest_Rj
+   
+      
+  

@@ -1,0 +1,15 @@
+ 
+<launch>
+
+ 
+  <arg name="moveit_controller_manager" default="moveit_simple_controller_manager/MoveItSimpleControllerManager" />
+  <param name="moveit_controller_manager" value="$( arg moveit_controller_manager)"/>
+  <!--<param name="use_controller_manager" value="false"/>
+  <param name="trajectory_execution/execution_duration_monitoring" value="false"/>-->
+  
+
+ 
+    <rosparam file="$(find yarab_5_config)/config/controllers.yaml"  />
+    <!--<rosparam file="$(find yarab_5_config)/config/ros_controllers.yaml"  />-->
+
+</launch>

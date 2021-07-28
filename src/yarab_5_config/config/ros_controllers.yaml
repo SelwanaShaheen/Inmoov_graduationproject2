@@ -1,0 +1,142 @@
+
+
+# Simulation settings for using moveit_sim_controllers
+moveit_sim_hw_interface:
+  joint_model_group: arm_l
+  joint_model_group_pose: home
+# Settings for ros_control_boilerplate control loop
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+hardware_interface:
+  joints:
+    - omo_Lj
+    - shouder_Lj
+    - rotate_Lj
+    - hand_Lj
+    - rest_Lj
+    - omo_Rj
+    - shoulder_Rj
+    - rotate_Rj
+    - hand_Rj
+    - rest_Rj
+    - wheel_Lj
+    - wheel_Lj1
+    - wheel_Rj
+    - wheel_Rj1
+  sim_control_mode: 1  # 0: position, 1: velocity
+
+
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+l_arm_position_controller:
+  type: position_controllers/JointTrajectoryController
+
+  joints:
+    - omo_Lj
+    - shouder_Lj
+    - rotate_Lj
+    - hand_Lj
+    - rest_Lj
+
+
+  constraints:
+     goal_time: 0.6
+     stopped_velocity_tolerance: 0
+     
+
+  gains:
+    omo_Lj:
+      p: 1000
+      d: 100
+      i: 10
+    shouder_Lj:
+      p: 1000
+      d: 100
+      i: 10
+    rotate_Lj:
+      p: 1000
+      d: 100
+      i: 10
+    hand_Lj:
+      p: 1000
+      d: 100
+      i: 10
+r_arm_position_controler:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - omo_Rj
+    - shoulder_Rj
+    - rotate_Rj
+    - hand_Rj
+    - rest_Rj
+    
+  constraints:
+     goal_time: 0.6
+     stopped_velocity_tolerance: 0
+      
+  gains:
+    omo_Rj:
+      p: 1000
+      d: 100
+      i: 10
+    shoulder_Rj:
+      p: 1000
+      d: 100
+      i: 10
+    rotate_Rj:
+      p: 1000
+      d: 100
+      i: 10
+    hand_Rj:
+      p: 1000
+      d: 100
+      i: 10
+diff_drive:  
+  type        : "diff_drive_controller/DiffDriveController"
+  left_wheel  : ['wheel_Lj', 'wheel_Lj1']
+  right_wheel : ['wheel_Rj', 'wheel_Rj1']
+  publish_rate: 50.0               # default: 50
+  pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  enable_odom_tf: false
+  odom_frame_id : odom
+# Wheel separation and diameter. These are both optional.
+# diff_drive_controller will attempt to read either one or both from the
+# URDF if not specified as a parameter
+  wheel_separation : 0.8
+  wheel_radius : 0.2
+
+# Wheel separation and radius multipliers
+  wheel_separation_multiplier: 1.0 # default: 1.0
+  wheel_radius_multiplier    : 1.0 # default: 1.0
+
+# Velocity commands timeout [s], default 0.5
+  cmd_vel_timeout: 0.25
+
+# Base frame_id
+  base_frame_id: base_link
+
+# Velocity and acceleration limits
+# Whenever a min_* is unspecified, default to -max_*
+  linear:
+    x:
+      has_velocity_limits    : true
+      max_velocity           : 1.0  # m/s
+      min_velocity           : -0.5 # m/s
+      has_acceleration_limits: true
+      max_acceleration       : 0.8  # m/s^2
+      min_acceleration       : -0.4 # m/s^2
+      has_jerk_limits        : true
+      max_jerk               : 5.0  # m/s^3
+  angular:
+    z:
+      has_velocity_limits    : true
+      max_velocity           : 1.7  # rad/s
+      has_acceleration_limits: true
+      max_acceleration       : 1.5  # rad/s^2
+      has_jerk_limits        : true
+      max_jerk               : 2.5  # rad/s^3

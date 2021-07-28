@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="yarab_5">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="arm_l">
+        <joint name="omo_Lj" />
+        <joint name="shouder_Lj" />
+        <joint name="rotate_Lj" />
+        <joint name="hand_Lj" />
+	<joint name="rest_Lj" />
+ 	 
+
+
+
+    </group>
+    <group name="arm_r">
+        <joint name="omo_Rj" />
+        <joint name="shoulder_Rj" />
+        <joint name="rotate_Rj" />
+        <joint name="hand_Rj" />
+ 	<joint name="rest_Rj" />
+  
+
+
+
+
+
+
+    </group>
+    <group name="hand_l">
+        <link name="end_zeft_L" />
+    </group>
+    <group name="hand_r">
+        <link name="end_zeft_R" />
+    </group>
+    <group name="both_arms">
+        <group name="arm_l" />
+        <group name="arm_r" />
+      
+        
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home-both" group="both_arms">
+        <joint name="hand_Lj" value="0" />
+        <joint name="hand_Rj" value="0" />
+        <joint name="omo_Lj" value="0" />
+        <joint name="omo_Rj" value="0" />
+        <joint name="rotate_Lj" value="-0.5" />
+        <joint name="rotate_Rj" value="0.5" />
+        <joint name="shouder_Lj" value="0" />
+        <joint name="shoulder_Rj" value="0" />
+    </group_state>
+    <group_state name="home-l" group="arm_l">
+        <joint name="hand_Lj" value="0" />
+        <joint name="omo_Lj" value="0" />
+        <joint name="rotate_Lj" value="-0.5" />
+        <joint name="shouder_Lj" value="0" />
+    </group_state>
+    <group_state name="home-r" group="arm_r">
+        <joint name="hand_Rj" value="0" />
+        <joint name="omo_Rj" value="0" />
+        <joint name="rotate_Rj" value="0.5" />
+        <joint name="shoulder_Rj" value="0" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="hand_r1" parent_link="rest_R" group="hand_r" />
+    <end_effector name="hand_l1" parent_link="rest_L" group="hand_l" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+   <!-- <virtual_joint name="virtual_joint" type="fixed" parent_frame="odom" child_link="root" />-->
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="base_link" link2="body" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="camera_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="hand_L" reason="Never" />
+    <disable_collisions link1="base_link" link2="hand_R" reason="Never" />
+    <disable_collisions link1="base_link" link2="head" reason="Never" />
+    <disable_collisions link1="base_link" link2="omo_L" reason="Never" />
+    <disable_collisions link1="base_link" link2="omo_R" reason="Never" />
+    <disable_collisions link1="base_link" link2="pedestal_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="rest_L" reason="Never" />
+    <disable_collisions link1="base_link" link2="rest_R" reason="Never" />
+    <disable_collisions link1="base_link" link2="rotate_L" reason="Never" />
+    <disable_collisions link1="base_link" link2="rotate_R" reason="Never" />
+    <disable_collisions link1="base_link" link2="shouder_L" reason="Never" />
+    <disable_collisions link1="base_link" link2="shoulder_R" reason="Never" />
+    <disable_collisions link1="base_link" link2="wheel_L" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="wheel_L1" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="wheel_R" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="wheel_R1" reason="Adjacent" />
+    <disable_collisions link1="body" link2="camera_link" reason="Default" />
+    <disable_collisions link1="body" link2="head" reason="Adjacent" />
+    <disable_collisions link1="body" link2="omo_L" reason="Adjacent" />
+    <disable_collisions link1="body" link2="omo_R" reason="Adjacent" />
+    <disable_collisions link1="body" link2="pedestal_link" reason="Default" />
+    <disable_collisions link1="body" link2="shoulder_R" reason="Default" />
+    <disable_collisions link1="body" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="body" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="body" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="body" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="camera_link" link2="head" reason="Never" />
+    <disable_collisions link1="camera_link" link2="omo_L" reason="Never" />
+    <disable_collisions link1="camera_link" link2="omo_R" reason="Never" />
+    <disable_collisions link1="camera_link" link2="pedestal_link" reason="Default" />
+    <disable_collisions link1="camera_link" link2="shouder_L" reason="Never" />
+    <disable_collisions link1="camera_link" link2="shoulder_R" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="hand_L" link2="rest_L" reason="Adjacent" />
+    <disable_collisions link1="hand_L" link2="rotate_L" reason="Adjacent" />
+    <disable_collisions link1="hand_L" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="hand_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="hand_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="hand_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="hand_R" link2="rest_R" reason="Adjacent" />
+    <disable_collisions link1="hand_R" link2="rotate_R" reason="Adjacent" />
+    <disable_collisions link1="hand_R" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="hand_R" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="hand_R" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="hand_R" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="head" link2="omo_L" reason="Never" />
+    <disable_collisions link1="head" link2="omo_R" reason="Never" />
+    <disable_collisions link1="head" link2="pedestal_link" reason="Never" />
+    <disable_collisions link1="head" link2="shouder_L" reason="Never" />
+    <disable_collisions link1="head" link2="shoulder_R" reason="Never" />
+    <disable_collisions link1="head" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="head" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="head" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="head" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="omo_L" link2="omo_R" reason="Never" />
+    <disable_collisions link1="omo_L" link2="pedestal_link" reason="Never" />
+    <disable_collisions link1="omo_L" link2="rotate_L" reason="Never" />
+    <disable_collisions link1="omo_L" link2="shouder_L" reason="Adjacent" />
+    <disable_collisions link1="omo_L" link2="shoulder_R" reason="Never" />
+    <disable_collisions link1="omo_L" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="omo_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="omo_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="omo_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="omo_R" link2="pedestal_link" reason="Never" />
+    <disable_collisions link1="omo_R" link2="rotate_R" reason="Never" />
+    <disable_collisions link1="omo_R" link2="shouder_L" reason="Never" />
+    <disable_collisions link1="omo_R" link2="shoulder_R" reason="Adjacent" />
+    <disable_collisions link1="omo_R" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="omo_R" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="omo_R" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="omo_R" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="shouder_L" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="shoulder_R" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="pedestal_link" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="rest_L" link2="rotate_L" reason="Never" />
+    <disable_collisions link1="rest_L" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="rest_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="rest_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="rest_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="rest_R" link2="rotate_R" reason="Never" />
+    <disable_collisions link1="rest_R" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="rest_R" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="rest_R" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="rest_R" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="rotate_L" link2="shouder_L" reason="Adjacent" />
+    <disable_collisions link1="rotate_L" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="rotate_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="rotate_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="rotate_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="rotate_R" link2="shoulder_R" reason="Adjacent" />
+    <disable_collisions link1="rotate_R" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="rotate_R" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="rotate_R" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="rotate_R" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="shouder_L" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="shouder_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="shouder_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="shouder_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="shoulder_R" link2="wheel_L" reason="Never" />
+    <disable_collisions link1="shoulder_R" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="shoulder_R" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="shoulder_R" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="wheel_L" link2="wheel_L1" reason="Never" />
+    <disable_collisions link1="wheel_L" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="wheel_L" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="wheel_L1" link2="wheel_R" reason="Never" />
+    <disable_collisions link1="wheel_L1" link2="wheel_R1" reason="Never" />
+    <disable_collisions link1="wheel_R" link2="wheel_R1" reason="Never" />
+</robot>
