@@ -1,0 +1,48 @@
+yarab_5:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  joint1_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: shouder_Lj
+    pid: {p: 1000, i: 10, d: 100}
+  joint2_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: shoulder_Rj
+    pid: {p: 1000, i: 10, d: 100}
+  joint3_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: omo_Lj
+    pid: {p: 1000, i: 10, d: 100}
+  joint4_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: omo_Rj
+    pid: {p: 1000, i: 10, d: 100}
+  joint5_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: hand_Lj
+    pid: {p: 1000, i: 10, d: 100}
+  joint6_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: hand_Rj
+    pid: {p: 1000, i: 10, d: 100}
+  joint7_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: rotate_Lj
+    pid: {p: 1000, i: 10, d: 100}
+  joint8_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: rotate_Rj
+    pid: {p: 1000, i: 10, d: 100}
+  joint9_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: rest_Lj
+    pid: {p: 1000, i: 10, d: 100}
+  joint10_effort_controller:
+    type: position_controllers/JointPositionController
+    joint: rest_Rj
+    pid: {p: 1000, i: 10, d: 100}
+  

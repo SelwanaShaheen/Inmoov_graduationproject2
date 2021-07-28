@@ -1,0 +1,58 @@
+<launch>
+
+  <!-- start up empty world -->
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <param name="/use_sim_time" value="true"/>
+  
+ 
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <arg name="gui" value="$(arg gui)"/>
+  <!--<arg name="world_name" default="$(find inmoov_description)/world/final_env.world"/>-->
+  <arg name="world_name" default="$(find inmoov_description)/world/kinecttt.world"/>
+	<arg name="paused" value="$(arg paused)"/>
+ 
+ 
+   </include>
+
+   <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 100" />
+   
+
+   <param name="robot_description" textfile="$(find inmoov_description)/urdf/inmoov.urdf"/>
+   <!-- State joints publisher for debug -->
+   <node unless="false" name="joint_state_publisher" pkg="joint_state_publisher"
+    type="joint_state_publisher" output="log" />
+
+   <!-- Combine joint values -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher"
+    type="robot_state_publisher" output="log" />
+   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" args=" -urdf -param robot_description -model inmoov -x 0 -y 0 -z 0" />
+   <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+   <rosparam file="$(find inmoov_description)/config/joint_names_inmoov.yaml" command="load" ns=""/>
+   <node pkg="tf" type="static_transform_publisher" name="root_odom_link" args=" 0 0 0 0 0 0 odom root 100" />
+   <node pkg="tf" type="static_transform_publisher" name="root_base_link" args=" 0 0 0 0 0 0 root base_link 100" />
+    <!-- load the controllers -->
+   <node name="controller_spawner" pkg ="controller_manager" type="spawner" respawn="false"
+      output="screen"  ns="/inmoov" args="joint_state_controller  
+  joint1_effort_controller
+  joint2_effort_controller
+  joint3_effort_controller 
+  joint4_effort_controller
+  joint5_effort_controller
+  joint6_effort_controller
+  joint7_effort_controller
+  joint8_effort_controller
+  joint9_effort_controller
+  joint10_effort_controller"/>
+   
+   
+     
+</launch>

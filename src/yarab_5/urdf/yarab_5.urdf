@@ -1,0 +1,1348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="yarab_5" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+   
+ 
+
+   <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.75 0.75 0.1"/>
+      </geometry> 
+      <origin rpy="0 0 0" xyz="0 0 0.105"/>
+ 
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0 " rpy=" 0 0 0.105"/>
+      <mass value="19"/>
+      <inertia ixx="2.360" ixy="0.702" ixz="-0.515" iyy="2.403" iyz="0.441" izz="1.8"/>
+    </inertial>
+  </link>
+
+
+   
+  
+  <link name="pedestal_link">
+    <visual>
+      <geometry>
+        <cylinder length="1" radius="0.03"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.6"/>
+ 
+    </visual>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="2.360" ixy="0.702" ixz="-0.515" iyy="2.403" iyz="0.441" izz="1.8"/>
+     </inertial>
+  </link>
+  <joint name="base_to_pedestal_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="pedestal_link"/>
+    <origin rpy="0 0 0"  xyz="-0.04 0 0"/>
+  </joint>
+
+  <link name="wheel_L">
+      
+    <inertial>
+ 
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+ 
+      <mass value="5"/>
+      <inertia
+        ixx="0.5"
+        ixy="0"
+        ixz="0"
+        iyy="0.3"
+        iyz="0"
+        izz="0.3" />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+       
+    </collision>
+
+    <visual name='wheel_L_visual'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+  
+     
+
+   <joint name="wheel_Lj" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_L"/>
+    <origin rpy="0 0 0"  xyz="-0.25 -0.4 0.05"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+ 
+    <joint_properties damping="0.001" friction="0.00001"/>
+  </joint>
+ 
+
+  <link name="wheel_R">
+      
+    <inertial>
+ 
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+ 
+       
+      <mass value="5"/>
+      <inertia
+        ixx="0.5"
+        ixy="0"
+        ixz="0"
+        iyy="0.3"
+        iyz="0"
+        izz="0.3" />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+        
+    </collision>
+
+    <visual name='wheel_R_visual'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+       <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+   
+     
+
+   <joint name="wheel_Rj" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_R"/>
+    <origin rpy="0 0 0"  xyz="-0.25 0.4 0.05"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+ 
+    <joint_properties damping="0.001" friction="0.00001"/>
+  </joint>
+  <!--<gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+      <publishOdomTF>true</publishOdomTF>
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>true</publishWheelTF>
+      <publishTf>true</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <torque>10</torque>
+      <updateRate>50.0</updateRate>
+      <leftJoint>wheel_Lj</leftJoint>
+      <rightJoint>wheel_Rj</rightJoint>
+      <wheelSeparation>0.8</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>20</wheelTorque>
+      <wheelAcceleration>1</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <legacyMode>false</legacyMode>
+    </plugin>
+  </gazebo>--> 
+
+  <link name="wheel_R1">
+      
+    <inertial>
+ 
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+ 
+       
+      <mass value="5"/>
+      <inertia
+        ixx="0.5"
+        ixy="0"
+        ixz="0"
+        iyy="0.3"
+        iyz="0"
+        izz="0.3" />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+       
+    </collision>
+
+    <visual name='wheel_R1_visual'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+       <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+   
+
+  <joint name="wheel_Rj1" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_R1"/>
+    <origin rpy="0 0 0"  xyz="0.25 0.4 0.05"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+ 
+    <joint_properties damping="0.001" friction="0.00001"/>
+  </joint>
+
+  <link name="wheel_L1">
+      
+    <inertial>
+ 
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+ 
+      <mass value="5"/>
+      <inertia
+        ixx="0.5"
+        ixy="0"
+        ixz="0"
+        iyy="0.3"
+        iyz="0"
+        izz="0.3" />
+    </inertial>
+
+    <collision name='collision'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/> 
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+       
+    </collision>
+
+    <visual name='wheel_L1_visual'>
+      <origin xyz="0 0 0" rpy=" 0 1.5707 1.5707"/>
+      <geometry>
+         <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+   
+     
+
+  <joint name="wheel_Lj1" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_L1"/>
+    <origin rpy="0 0 0"  xyz="0.25 -0.4 0.05"/>
+    <axis xyz="0 1 0" rpy="0 0 0" />
+ 
+    <joint_properties damping="0.001" friction="0.00001"/>
+  </joint>
+  <!--<gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+      <publishOdomTF>true</publishOdomTF>
+      <rosDebugLevel>Debug</rosDebugLevel>
+      <publishWheelTF>true</publishWheelTF>
+      <publishTf>true</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <leftJoint>wheel_Lj1</leftJoint>
+      <rightJoint>wheel_Rj1</rightJoint>
+      <wheelSeparation>0.8</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <broadcastTF>1</broadcastTF>
+      <wheelTorque>20</wheelTorque>
+      <wheelAcceleration>1</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <legacyMode>false</legacyMode>
+    </plugin>
+  </gazebo>-->
+ 
+
+
+  <!-- <link
+    name="caster">
+    <inertial>
+      <origin
+        xyz="0.0343540178179281 -0.00804234578799452 -0.035721628705299"
+        rpy="0 0 0" />
+      <mass
+        value="1.81765554433287" />
+      <inertia
+        ixx="0.00201711990339206"
+        ixy="1.59053007025258E-17"
+        ixz="4.29492932718007E-18"
+        iyy="0.00341060325818899"
+        iyz="-2.06565000779944E-17"
+        izz="0.00181229640803809" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/caster.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.647058823529412 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/caster.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="caster_joint"
+    type="fixed">
+    <origin
+      xyz="0.18065 0.0091028 -0.043699"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="caster" />
+    <axis
+      xyz="0 0 0" />
+  </joint>-->
+  <link
+    name="body">
+    <inertial>
+      <origin
+        xyz="-0.0384918724857681 0.00178552458421267 0.159935059228738"
+        rpy="0 0 0" />
+      <mass
+        value="1.91202002917265" />
+      <inertia
+        ixx="0.00273303625317548"
+        ixy="-2.06285913284317E-07"
+        ixz="9.2959308530691E-06"
+        iyy="0.0016531430085364"
+        iyz="0.000101386942419808"
+        izz="0.00140674846336726" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/body.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/body.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="body_link"
+    type="fixed">
+    <origin
+      xyz="-0.0050417 0.0013268 1.0235"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="body" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="omo_L">
+    <inertial>
+      <origin
+        xyz="0.0212694318696867 -0.00566332804666483 -0.0426371813176138"
+        rpy="0 0 0" />
+      <mass
+        value="0.135697540457828" />
+      <inertia
+        ixx="0.000162318927052278"
+        ixy="1.60919051595649E-06"
+        ixz="-1.98518662725654E-05"
+        iyy="0.00025396441224876"
+        iyz="-1.2910748790188E-06"
+        izz="0.000106851321139916" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/omo_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/omo_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="omo_Lj"
+    type="revolute">
+    <origin
+      xyz="-0.061433 -0.14191 0.29478"
+      rpy="0 0 0" />
+    <parent
+      link="body" />
+    <child
+      link="omo_L" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0"
+      upper="1"
+      effort="10"
+      velocity="3" />
+     
+  </joint>
+  <link
+    name="shouder_L">
+    <inertial>
+      <origin
+        xyz="0.0183588183182291 -0.0444633939975331 -0.0145068599892659"
+        rpy="0 0 0" />
+      <mass
+        value="0.31191383251679" />
+      <inertia
+        ixx="0.000309456989034"
+        ixy="-1.06190992090652E-05"
+        ixz="-4.05071828768625E-05"
+        iyy="0.000255452213653355"
+        iyz="-1.22821429542959E-05"
+        izz="0.000321418688570605" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/shouder_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/shouder_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shouder_Lj"
+    type="revolute">
+    <origin
+      xyz="0.02799 -0.016748 -0.038733"
+      rpy="0 0 0" />
+    <parent
+      link="omo_L" />
+    <child
+      link="shouder_L" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="1"
+      effort="10"
+      velocity="3" />
+   
+  </joint>
+  <link
+    name="rotate_L">
+    <inertial>
+      <origin
+        xyz="-0.0224626093094605 0.00163329475110996 0.00453035237775867"
+        rpy="0 0 0" />
+      <mass
+        value="0.262977284557384" />
+      <inertia
+        ixx="0.000292121426480082"
+        ixy="1.27284282685936E-05"
+        ixz="-5.61396756699046E-05"
+        iyy="0.000387783560790661"
+        iyz="1.90160846953877E-05"
+        izz="0.00019359045472725" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rotate_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rotate_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotate_Lj"
+    type="revolute">
+    <origin
+      xyz="0.10354 -0.067278 -0.11868"
+      rpy="0 0 0" />
+    <parent
+      link="shouder_L" />
+    <child
+      link="rotate_L" />
+    <axis
+      xyz="0.65912 -0.004428 -0.75202" />
+    <limit
+      lower="-1.5"
+      upper="-0.5"
+      effort="10"
+      velocity="3" />
+     
+  </joint>
+  <link
+    name="hand_L">
+    <inertial>
+      <origin
+        xyz="0.0559447876925415 -0.00779673969551703 -0.0745916479393384"
+        rpy="0 0 0" />
+      <mass
+        value="0.327188298164344" />
+      <inertia
+        ixx="0.000520434460456842"
+        ixy="-4.17781288930706E-05"
+        ixz="-1.51804077844164E-05"
+        iyy="0.000384452370934889"
+        iyz="-3.254421297706E-05"
+        izz="0.000530459987533421" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/hand_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/hand_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="hand_Lj"
+    type="revolute">
+    <origin
+      xyz="0.048896 0.0048821 -0.12843"
+      rpy="0 0 0" />
+    <parent
+      link="rotate_L" />
+    <child
+      link="hand_L" />
+    <axis
+      xyz="0.087987 0.99357 0.071267" />
+    <limit
+       lower="-1.10"
+      upper="0"
+      effort="10"
+      velocity="3" />
+  </joint>
+  <link
+    name="rest_L">
+    <inertial>
+      <origin
+        xyz="0.0188857218020566 -0.00412551389833113 -0.0184291003042329"
+        rpy="0 0 0" />
+      <mass
+        value="0.185026014260809" />
+      <inertia
+        ixx="8.71300457283702E-05"
+        ixy="6.89250490012657E-06"
+        ixz="2.83671209013227E-05"
+        iyy="7.62808725553407E-05"
+        iyz="-1.80128983377849E-05"
+        izz="5.53607594891623E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rest_L.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rest_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rest_Lj"
+    type="revolute">
+    <origin
+      xyz="0.18924 -0.010997 -0.2897"
+      rpy="0 0 0" />
+    <parent
+      link="hand_L" />
+    <child
+      link="rest_L" />
+    <axis
+      xyz="-0.53136 -0.013701 0.84704" />
+    <limit
+      lower="0"
+      upper="1"
+      effort="10"
+      velocity="3" />
+  </joint>
+
+
+ 
+  <link name="end_zeft_L"/>
+  <joint name="end_zeft_Lj" type="revolute">
+    <parent link="rest_L"/>
+    <child link="end_zeft_L"/>
+    <origin rpy="0 0 0"  xyz="0.3 0.012764 -0.28404"/>
+    <axis  xyz="-0.7 0.0023746 0.76379" />
+    <limit
+      lower="-1"
+      upper="0"
+      effort="10"
+      velocity="3" />
+  </joint>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link
+    name="omo_R">
+    <inertial>
+      <origin
+        xyz="-0.0524232487351919 0.00286389736088846 -0.043731423271426"
+        rpy="0 0 0" />
+      <mass
+        value="0.135697540430682" />
+      <inertia
+        ixx="0.000162318941282968"
+        ixy="-1.84283661019144E-06"
+        ixz="-1.98315403742906E-05"
+        iyy="0.000253974415932807"
+        iyz="-4.41583946421858E-07"
+        izz="0.000106841331671834" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/omo_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/omo_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="omo_Rj"
+    type="revolute">
+    <origin
+      xyz="0.012259 0.14242 0.29589"
+      rpy="0 0 0" />
+    <parent
+      link="body" />
+    <child
+      link="omo_R" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="-1"
+      upper="0"
+      effort="10"
+      velocity="3" />
+    
+  </joint>
+  <link
+    name="shoulder_R">
+    <inertial>
+      <origin
+        xyz="0.0183588175208857 0.0438141843890701 -0.0369271087793255"
+        rpy="0 0 0" />
+      <mass
+        value="0.311913841720798" />
+      <inertia
+        ixx="0.000309456982753045"
+        ixy="1.01413561515747E-05"
+        ixz="-4.06294249209773E-05"
+        iyy="0.000255750613380444"
+        iyz="1.30554954143824E-05"
+        izz="0.00032112030866524" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/shoulder_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/shoulder_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="shoulder_Rj"
+    type="revolute">
+    <origin
+      xyz="-0.045703 0.01447 -0.01806"
+      rpy="0 0 0" />
+    <parent
+      link="omo_R" />
+    <child
+      link="shoulder_R" />
+    <axis
+      xyz="0 0.99993 -0.011776" />
+    <limit
+      lower="-1"
+      upper="0"
+      effort="10"
+      velocity="3" />
+ 
+  </joint>
+  <link
+    name="rotate_R">
+    <inertial>
+      <origin
+        xyz="-0.022463 0.0016333 0.0045304"
+        rpy="0 0 0" />
+      <mass
+        value="0.26298" />
+      <inertia
+        ixx="0.00029212"
+        ixy="1.2728E-05"
+        ixz="-5.614E-05"
+        iyy="0.00038778"
+        iyz="1.9016E-05"
+        izz="0.00019359" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rotate_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.32" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rotate_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotate_Rj"
+    type="revolute">
+    <origin
+      xyz="0.10354 0.065426 -0.14136"
+      rpy="0 0 0" />
+    <parent
+      link="shoulder_R" />
+    <child
+      link="rotate_R" />
+    <axis
+      xyz="0.65912 -0.004428 -0.75202" />
+    <limit
+      lower="0.5"
+      upper="1.5"
+      effort="10"
+      velocity="3" />
+ 
+  </joint>
+  <link
+    name="hand_R">
+    <inertial>
+      <origin
+        xyz="0.0675226597614774 0.00663485872455144 -0.0646965476859732"
+        rpy="0 0 0" />
+      <mass
+        value="0.327181497650131" />
+      <inertia
+        ixx="0.000533263163681015"
+        ixy="1.28257228347251E-05"
+        ixz="-7.53529851206024E-06"
+        iyy="0.000367614467908172"
+        iyz="1.58861797474135E-05"
+        izz="0.000534466426155837" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/hand_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/hand_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="hand_Rj"
+    type="revolute">
+    <origin
+      xyz="0.048896 0.0048821 -0.12843"
+      rpy="0 0 0" />
+    <parent
+      link="rotate_R" />
+    <child
+      link="hand_R" />
+    <axis
+      xyz="-0.087987 -0.99357 -0.071267" />
+    <limit
+       lower="0"
+      upper="1.1"
+      effort="10"
+      velocity="3" />
+     
+  </joint>
+  <link
+    name="rest_R">
+    <inertial>
+      <origin
+        xyz="-5.05268808778658E-05 0.00243132869478613 0.0113427620381037"
+        rpy="0 0 0" />
+      <mass
+        value="0.185027184716738" />
+      <inertia
+        ixx="7.27003367111184E-05"
+        ixy="-1.60085720722962E-05"
+        ixz="3.22748272006103E-05"
+        iyy="7.62024107888347E-05"
+        iyz="1.13794075702724E-05"
+        izz="6.98724470484816E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rest_R.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/rest_R.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rest_Rj"
+    type="revolute">
+    <origin
+      xyz="0.25306 0.012764 -0.28404"
+      rpy="0 0 0" />
+    <parent
+      link="hand_R" />
+    <child
+      link="rest_R" />
+    <axis
+      xyz="-0.64546 0.0023746 0.76379" />
+    <limit
+      lower="-1"
+      upper="0"
+      effort="10"
+      velocity="3" />
+  </joint>
+
+
+
+
+
+
+
+
+ 
+  <link name="end_zeft_R"/>
+  <joint name="end_zeft_Rj" type="revolute">
+    <parent link="rest_R"/>
+    <child link="end_zeft_R"/>
+    <origin rpy="0 0 0"  xyz="0.3 0.012764 -0.28404"/>
+    <axis  xyz="-0.7 0.0023746 0.76379" />
+    <limit
+      lower="-1"
+      upper="0"
+      effort="10"
+      velocity="3" />
+  </joint>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <link
+    name="head">
+    <inertial>
+      <origin
+        xyz="-0.00715860558069739 -8.48271899615599E-05 -0.0925552271138886"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0.000404992387441616"
+        ixy="1.23887720838123E-06"
+        ixz="2.30662913464664E-05"
+        iyy="0.000575216177687307"
+        iyz="-4.13331909858923E-06"
+        izz="0.000526322271498493" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/head.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yarab_5/meshes/head.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="head_joint"
+    type="fixed">
+    <origin
+      xyz="-0.073757 0.0018778 0.63998"
+      rpy="0 0 0" />
+    <parent
+      link="body" />
+    <child
+      link="head" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
+      <geometry>
+         <mesh filename="package://yarab_5/meshes/sensor/kinect.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.57079632679"/>
+      <geometry>
+         <mesh filename="package://yarab_5/meshes/sensor/kinect.dae"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <box_inertia m="0.1" x="0.05" y="0.05" z="0.05" />
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 1.12" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+  <link name="camera_frame_optical"/>
+  <joint name="camera_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="-1.57079632679 0 -1.57079632679"/>
+      <parent link="camera_link"/>
+      <child link="camera_frame_optical"/>
+  </joint>
+ 
+
+  <gazebo reference="camera_link">
+			<sensor type="depth" name="camera_rgb_sensor">
+				<always_on>true</always_on>
+				<update_rate>1.0</update_rate>
+				<camera>
+					<horizontal_fov>1.047198</horizontal_fov>
+					<image>
+						<format>R8G8B8</format>
+						<width>640</width>
+						<height>480</height>
+					</image>
+					<clip>
+						<near>0.03</near>
+						<far>5</far>
+					</clip>
+				</camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+					<alwaysOn>true</alwaysOn>
+					<updateRate>1.0</updateRate>
+					<cameraName>camera_rgb1</cameraName>
+					<imageTopicName>/camera/rgb/image_raw1</imageTopicName>
+					<cameraInfoTopicName>/camera/rgb/camera_info1</cameraInfoTopicName>
+					<depthImageTopicName>/camera/depth/image_raw1</depthImageTopicName>
+					<depthImageCameraInfoTopicName>/camera/depth/camera_info1</depthImageCameraInfoTopicName>
+					<pointCloudTopicName>/camera/depth_registered/points1</pointCloudTopicName>
+					<frameName>camera_frame_optical</frameName>
+					<pointCloudCutoff>0.5</pointCloudCutoff>
+					<distortionK1>0.00000001</distortionK1>
+					<distortionK2>0.00000001</distortionK2>
+					<distortionK3>0.00000001</distortionK3>
+					<distortionT1>0.00000001</distortionT1>
+					<distortionT2>0.00000001</distortionT2>
+					<CxPrime>0</CxPrime>
+					<Cx>0</Cx>
+					<Cy>0</Cy>
+					<focalLength>0</focalLength>
+					<hackBaseline>0</hackBaseline>
+				</plugin>
+			</sensor>
+  </gazebo>
+  
+  <transmission name="wheel_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_Lj">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_Lj_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="wheel_Lj1_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_Lj1">
+
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+
+    </joint>
+    <actuator name="wheel_Lj1_motor">
+
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+
+        <mechanicalReduction>1</mechanicalReduction>
+
+    </actuator>
+
+  </transmission>
+  <transmission name="wheel_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wheel_Rj">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wheel_Rj_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+
+  <transmission name="wheel_Rj1_joint1">
+
+    <type>transmission_interface/SimpleTransmission</type>
+
+    <joint name="wheel_Rj1">
+
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+
+    </joint>
+
+    <actuator name="wheel_Rj1_motor">
+
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+
+        <mechanicalReduction>1</mechanicalReduction>
+
+    </actuator>
+
+  </transmission>
+  <transmission name="omo_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="omo_Lj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="omo_Lj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="shouder_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shouder_Lj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shouder_Lj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="rotate_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotate_Lj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotate_Lj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="hand_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hand_Lj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hand_Lj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="omo_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="omo_Rj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="omo_Rj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="shoulder_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_Rj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_Rj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="rotate_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rotate_Rj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rotate_Rj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="hand_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="hand_Rj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="hand_Rj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="rest_Rj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rest_Rj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rest_Rj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="rest_Lj_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="rest_Lj">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rest_Lj_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace></robotNamespace>
+              <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+        <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+</robot>
